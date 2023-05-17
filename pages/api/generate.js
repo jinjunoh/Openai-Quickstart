@@ -51,12 +51,25 @@ export default async function (req, res) {
 function generatePrompt(animal) {
   const capitalizedAnimal =
     animal[0].toUpperCase() + animal.slice(1).toLowerCase();
-  return `Suggest three synonyms for the given input.
-
-Animal: Smart
-Names: Intelligent, Clever, Sharp
-Animal: Dull
-Names: Boring, Uninteresting,Tedious
+  let prompt = `Give one example sentence to the given input as well as three synonyms.`;
+  if (capitalizedAnimal === 'Brilliant') {
+    prompt += `
 Animal: ${capitalizedAnimal}
-Names:`;
+Example Sentence: "The scientist made a brilliant discovery that revolutionized the field of medicine." 
+Synonyms: Outstanding, Exceptional, Superb`;
+  } else if (capitalizedAnimal === 'Concur') {
+    prompt += `
+Animal: ${capitalizedAnimal}
+Example Sentence: "I concur with my colleague's assessment of the situation." 
+Synonyms: Agree, Consent, Accord`;
+  } else {
+    prompt += `
+Animal: ${capitalizedAnimal}
+Example Sentence: 
+Synonyms: `;
+  }
+  return prompt;
 }
+
+
+
